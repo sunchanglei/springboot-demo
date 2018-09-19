@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.boot.bo.User">
+    <id column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="certificate_type" jdbcType="VARCHAR" property="certificateType" />
+    <result column="certificate_no" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="trade" jdbcType="VARCHAR" property="trade" />
+    <result column="contacts" jdbcType="VARCHAR" property="contacts" />
+    <result column="parent" jdbcType="VARCHAR" property="parent" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="visit_type" jdbcType="VARCHAR" property="visitType" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="query_day_limit" jdbcType="INTEGER" property="queryDayLimit" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="father" jdbcType="VARCHAR" property="father" />
+    <result column="month_limit" jdbcType="INTEGER" property="monthLimit" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="invite_code" jdbcType="VARCHAR" property="inviteCode" />
+    <result column="service_code" jdbcType="VARCHAR" property="serviceCode" />
+    <result column="regist_from" jdbcType="VARCHAR" property="registFrom" />
+    <result column="user_class" jdbcType="VARCHAR" property="userClass" />
+    <result column="company_registr_number" jdbcType="VARCHAR" property="companyRegistrNumber" />
+    <result column="legal_person" jdbcType="VARCHAR" property="legalPerson" />
+    <result column="legal_person_cerno" jdbcType="VARCHAR" property="legalPersonCerno" />
+    <result column="company_phone" jdbcType="VARCHAR" property="companyPhone" />
+    <result column="company_address" jdbcType="VARCHAR" property="companyAddress" />
+    <result column="data_company_verify_status" jdbcType="INTEGER" property="dataCompanyVerifyStatus" />
+    <result column="job_title" jdbcType="VARCHAR" property="jobTitle" />
+    <result column="person_verify_pic" jdbcType="VARCHAR" property="personVerifyPic" />
+    <result column="person_verify_status" jdbcType="VARCHAR" property="personVerifyStatus" />
+    <result column="company_verify_pic" jdbcType="VARCHAR" property="companyVerifyPic" />
+    <result column="company_verify_status" jdbcType="VARCHAR" property="companyVerifyStatus" />
+    <result column="email_verify_status" jdbcType="VARCHAR" property="emailVerifyStatus" />
+    <result column="law_num" jdbcType="VARCHAR" property="lawNum" />
+    <result column="is_formal" jdbcType="VARCHAR" property="isFormal" />
+    <result column="valid_time" jdbcType="TIMESTAMP" property="validTime" />
+    <result column="password_level" jdbcType="INTEGER" property="passwordLevel" />
+    <result column="weixin_openid" jdbcType="VARCHAR" property="weixinOpenid" />
+    <result column="weixin_unionid" jdbcType="VARCHAR" property="weixinUnionid" />
+    <result column="recommend_code" jdbcType="VARCHAR" property="recommendCode" />
+    <result column="login_times" jdbcType="INTEGER" property="loginTimes" />
+    <result column="user_operator" jdbcType="VARCHAR" property="userOperator" />
+    <result column="apply_auth_time" jdbcType="TIMESTAMP" property="applyAuthTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="outer_inner" jdbcType="INTEGER" property="outerInner" />
+    <result column="frozen_time" jdbcType="TIMESTAMP" property="frozenTime" />
+    <result column="thd_plat" jdbcType="VARCHAR" property="thdPlat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_name, real_name, password, api_key, user_type, certificate_type, certificate_no, 
+    email, phone, address, profession, trade, contacts, parent, status, add_time, visit_type, 
+    company, query_day_limit, last_login_time, last_login_ip, father, month_limit, level, 
+    invite_code, service_code, regist_from, user_class, company_registr_number, legal_person, 
+    legal_person_cerno, company_phone, company_address, data_company_verify_status, job_title, 
+    person_verify_pic, person_verify_status, company_verify_pic, company_verify_status, 
+    email_verify_status, law_num, is_formal, valid_time, password_level, weixin_openid, 
+    weixin_unionid, recommend_code, login_times, user_operator, apply_auth_time, remark, 
+    outer_inner, frozen_time, thd_plat
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.boot.bo.User">
+    insert into user (user_name, real_name, password, 
+      api_key, user_type, certificate_type, 
+      certificate_no, email, phone, 
+      address, profession, trade, 
+      contacts, parent, status, 
+      add_time, visit_type, company, 
+      query_day_limit, last_login_time, last_login_ip, 
+      father, month_limit, level, 
+      invite_code, service_code, regist_from, 
+      user_class, company_registr_number, legal_person, 
+      legal_person_cerno, company_phone, company_address, 
+      data_company_verify_status, job_title, person_verify_pic, 
+      person_verify_status, company_verify_pic, company_verify_status, 
+      email_verify_status, law_num, is_formal, 
+      valid_time, password_level, weixin_openid, 
+      weixin_unionid, recommend_code, login_times, 
+      user_operator, apply_auth_time, remark, 
+      outer_inner, frozen_time, thd_plat
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{apiKey,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{certificateType,jdbcType=VARCHAR}, 
+      #{certificateNo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{trade,jdbcType=VARCHAR}, 
+      #{contacts,jdbcType=VARCHAR}, #{parent,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{visitType,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{queryDayLimit,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, 
+      #{father,jdbcType=VARCHAR}, #{monthLimit,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{inviteCode,jdbcType=VARCHAR}, #{serviceCode,jdbcType=VARCHAR}, #{registFrom,jdbcType=VARCHAR}, 
+      #{userClass,jdbcType=VARCHAR}, #{companyRegistrNumber,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, 
+      #{legalPersonCerno,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, 
+      #{dataCompanyVerifyStatus,jdbcType=INTEGER}, #{jobTitle,jdbcType=VARCHAR}, #{personVerifyPic,jdbcType=VARCHAR}, 
+      #{personVerifyStatus,jdbcType=VARCHAR}, #{companyVerifyPic,jdbcType=VARCHAR}, #{companyVerifyStatus,jdbcType=VARCHAR}, 
+      #{emailVerifyStatus,jdbcType=VARCHAR}, #{lawNum,jdbcType=VARCHAR}, #{isFormal,jdbcType=VARCHAR}, 
+      #{validTime,jdbcType=TIMESTAMP}, #{passwordLevel,jdbcType=INTEGER}, #{weixinOpenid,jdbcType=VARCHAR}, 
+      #{weixinUnionid,jdbcType=VARCHAR}, #{recommendCode,jdbcType=VARCHAR}, #{loginTimes,jdbcType=INTEGER}, 
+      #{userOperator,jdbcType=VARCHAR}, #{applyAuthTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{outerInner,jdbcType=INTEGER}, #{frozenTime,jdbcType=TIMESTAMP}, #{thdPlat,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.bo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="apiKey != null">
+        api_key,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="certificateType != null">
+        certificate_type,
+      </if>
+      <if test="certificateNo != null">
+        certificate_no,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="trade != null">
+        trade,
+      </if>
+      <if test="contacts != null">
+        contacts,
+      </if>
+      <if test="parent != null">
+        parent,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="visitType != null">
+        visit_type,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="queryDayLimit != null">
+        query_day_limit,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="father != null">
+        father,
+      </if>
+      <if test="monthLimit != null">
+        month_limit,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="inviteCode != null">
+        invite_code,
+      </if>
+      <if test="serviceCode != null">
+        service_code,
+      </if>
+      <if test="registFrom != null">
+        regist_from,
+      </if>
+      <if test="userClass != null">
+        user_class,
+      </if>
+      <if test="companyRegistrNumber != null">
+        company_registr_number,
+      </if>
+      <if test="legalPerson != null">
+        legal_person,
+      </if>
+      <if test="legalPersonCerno != null">
+        legal_person_cerno,
+      </if>
+      <if test="companyPhone != null">
+        company_phone,
+      </if>
+      <if test="companyAddress != null">
+        company_address,
+      </if>
+      <if test="dataCompanyVerifyStatus != null">
+        data_company_verify_status,
+      </if>
+      <if test="jobTitle != null">
+        job_title,
+      </if>
+      <if test="personVerifyPic != null">
+        person_verify_pic,
+      </if>
+      <if test="personVerifyStatus != null">
+        person_verify_status,
+      </if>
+      <if test="companyVerifyPic != null">
+        company_verify_pic,
+      </if>
+      <if test="companyVerifyStatus != null">
+        company_verify_status,
+      </if>
+      <if test="emailVerifyStatus != null">
+        email_verify_status,
+      </if>
+      <if test="lawNum != null">
+        law_num,
+      </if>
+      <if test="isFormal != null">
+        is_formal,
+      </if>
+      <if test="validTime != null">
+        valid_time,
+      </if>
+      <if test="passwordLevel != null">
+        password_level,
+      </if>
+      <if test="weixinOpenid != null">
+        weixin_openid,
+      </if>
+      <if test="weixinUnionid != null">
+        weixin_unionid,
+      </if>
+      <if test="recommendCode != null">
+        recommend_code,
+      </if>
+      <if test="loginTimes != null">
+        login_times,
+      </if>
+      <if test="userOperator != null">
+        user_operator,
+      </if>
+      <if test="applyAuthTime != null">
+        apply_auth_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="outerInner != null">
+        outer_inner,
+      </if>
+      <if test="frozenTime != null">
+        frozen_time,
+      </if>
+      <if test="thdPlat != null">
+        thd_plat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null">
+        #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateType != null">
+        #{certificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null">
+        #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitType != null">
+        #{visitType,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="queryDayLimit != null">
+        #{queryDayLimit,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="father != null">
+        #{father,jdbcType=VARCHAR},
+      </if>
+      <if test="monthLimit != null">
+        #{monthLimit,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="inviteCode != null">
+        #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCode != null">
+        #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registFrom != null">
+        #{registFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="userClass != null">
+        #{userClass,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRegistrNumber != null">
+        #{companyRegistrNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonCerno != null">
+        #{legalPersonCerno,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null">
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dataCompanyVerifyStatus != null">
+        #{dataCompanyVerifyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="jobTitle != null">
+        #{jobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="personVerifyPic != null">
+        #{personVerifyPic,jdbcType=VARCHAR},
+      </if>
+      <if test="personVerifyStatus != null">
+        #{personVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyVerifyPic != null">
+        #{companyVerifyPic,jdbcType=VARCHAR},
+      </if>
+      <if test="companyVerifyStatus != null">
+        #{companyVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="emailVerifyStatus != null">
+        #{emailVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lawNum != null">
+        #{lawNum,jdbcType=VARCHAR},
+      </if>
+      <if test="isFormal != null">
+        #{isFormal,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null">
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passwordLevel != null">
+        #{passwordLevel,jdbcType=INTEGER},
+      </if>
+      <if test="weixinOpenid != null">
+        #{weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinUnionid != null">
+        #{weixinUnionid,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendCode != null">
+        #{recommendCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTimes != null">
+        #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userOperator != null">
+        #{userOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="applyAuthTime != null">
+        #{applyAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="outerInner != null">
+        #{outerInner,jdbcType=INTEGER},
+      </if>
+      <if test="frozenTime != null">
+        #{frozenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thdPlat != null">
+        #{thdPlat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.bo.User">
+    update user
+    <set>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="apiKey != null">
+        api_key = #{apiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateType != null">
+        certificate_type = #{certificateType,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null">
+        trade = #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null">
+        parent = #{parent,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitType != null">
+        visit_type = #{visitType,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="queryDayLimit != null">
+        query_day_limit = #{queryDayLimit,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="father != null">
+        father = #{father,jdbcType=VARCHAR},
+      </if>
+      <if test="monthLimit != null">
+        month_limit = #{monthLimit,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="inviteCode != null">
+        invite_code = #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCode != null">
+        service_code = #{serviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registFrom != null">
+        regist_from = #{registFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="userClass != null">
+        user_class = #{userClass,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRegistrNumber != null">
+        company_registr_number = #{companyRegistrNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonCerno != null">
+        legal_person_cerno = #{legalPersonCerno,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null">
+        company_phone = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dataCompanyVerifyStatus != null">
+        data_company_verify_status = #{dataCompanyVerifyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="jobTitle != null">
+        job_title = #{jobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="personVerifyPic != null">
+        person_verify_pic = #{personVerifyPic,jdbcType=VARCHAR},
+      </if>
+      <if test="personVerifyStatus != null">
+        person_verify_status = #{personVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyVerifyPic != null">
+        company_verify_pic = #{companyVerifyPic,jdbcType=VARCHAR},
+      </if>
+      <if test="companyVerifyStatus != null">
+        company_verify_status = #{companyVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="emailVerifyStatus != null">
+        email_verify_status = #{emailVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lawNum != null">
+        law_num = #{lawNum,jdbcType=VARCHAR},
+      </if>
+      <if test="isFormal != null">
+        is_formal = #{isFormal,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null">
+        valid_time = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passwordLevel != null">
+        password_level = #{passwordLevel,jdbcType=INTEGER},
+      </if>
+      <if test="weixinOpenid != null">
+        weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinUnionid != null">
+        weixin_unionid = #{weixinUnionid,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendCode != null">
+        recommend_code = #{recommendCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTimes != null">
+        login_times = #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userOperator != null">
+        user_operator = #{userOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="applyAuthTime != null">
+        apply_auth_time = #{applyAuthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="outerInner != null">
+        outer_inner = #{outerInner,jdbcType=INTEGER},
+      </if>
+      <if test="frozenTime != null">
+        frozen_time = #{frozenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thdPlat != null">
+        thd_plat = #{thdPlat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.bo.User">
+    update user
+    set real_name = #{realName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      api_key = #{apiKey,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      certificate_type = #{certificateType,jdbcType=VARCHAR},
+      certificate_no = #{certificateNo,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      trade = #{trade,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      parent = #{parent,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      visit_type = #{visitType,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      query_day_limit = #{queryDayLimit,jdbcType=INTEGER},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      father = #{father,jdbcType=VARCHAR},
+      month_limit = #{monthLimit,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      invite_code = #{inviteCode,jdbcType=VARCHAR},
+      service_code = #{serviceCode,jdbcType=VARCHAR},
+      regist_from = #{registFrom,jdbcType=VARCHAR},
+      user_class = #{userClass,jdbcType=VARCHAR},
+      company_registr_number = #{companyRegistrNumber,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      legal_person_cerno = #{legalPersonCerno,jdbcType=VARCHAR},
+      company_phone = #{companyPhone,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      data_company_verify_status = #{dataCompanyVerifyStatus,jdbcType=INTEGER},
+      job_title = #{jobTitle,jdbcType=VARCHAR},
+      person_verify_pic = #{personVerifyPic,jdbcType=VARCHAR},
+      person_verify_status = #{personVerifyStatus,jdbcType=VARCHAR},
+      company_verify_pic = #{companyVerifyPic,jdbcType=VARCHAR},
+      company_verify_status = #{companyVerifyStatus,jdbcType=VARCHAR},
+      email_verify_status = #{emailVerifyStatus,jdbcType=VARCHAR},
+      law_num = #{lawNum,jdbcType=VARCHAR},
+      is_formal = #{isFormal,jdbcType=VARCHAR},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      password_level = #{passwordLevel,jdbcType=INTEGER},
+      weixin_openid = #{weixinOpenid,jdbcType=VARCHAR},
+      weixin_unionid = #{weixinUnionid,jdbcType=VARCHAR},
+      recommend_code = #{recommendCode,jdbcType=VARCHAR},
+      login_times = #{loginTimes,jdbcType=INTEGER},
+      user_operator = #{userOperator,jdbcType=VARCHAR},
+      apply_auth_time = #{applyAuthTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      outer_inner = #{outerInner,jdbcType=INTEGER},
+      frozen_time = #{frozenTime,jdbcType=TIMESTAMP},
+      thd_plat = #{thdPlat,jdbcType=VARCHAR}
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </update>
+</mapper>

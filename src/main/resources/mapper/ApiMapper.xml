@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.mapper.ApiMapper" >
+  <resultMap id="BaseResultMap" type="com.boot.bo.ApiBo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="api_name" property="apiName" jdbcType="VARCHAR" />
+    <result column="api_type" property="apiType" jdbcType="VARCHAR" />
+    <result column="api_group" property="apiGroup" jdbcType="VARCHAR" />
+    <result column="is_free" property="isFree" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="business" property="business" jdbcType="VARCHAR" />
+    <result column="is_web" property="isWeb" jdbcType="VARCHAR" />
+    <result column="is_open" property="isOpen" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="api_category" property="apiCategory" jdbcType="VARCHAR" />
+    <result column="is_auth" property="isAuth" jdbcType="INTEGER" />
+    <result column="request_sample" property="requestSample" jdbcType="VARCHAR" />
+    <result column="return_sample" property="returnSample" jdbcType="VARCHAR" />
+    <result column="up_or_down" property="upOrDown" jdbcType="VARCHAR" />
+    <result column="small_icon" property="smallIcon" jdbcType="VARCHAR" />
+    <result column="big_icon" property="bigIcon" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="cost_type" property="costType" jdbcType="VARCHAR" />
+    <result column="disable" property="disable" jdbcType="VARCHAR" />
+    <result column="price_description" property="priceDescription" jdbcType="VARCHAR" />
+    <result column="repeat_time" property="repeatTime" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, api_name, api_type, api_group, is_free, description, business, is_web, is_open, 
+    level, price, api_category, is_auth, request_sample, return_sample, up_or_down, small_icon, 
+    big_icon, category_id, pid, cost_type, disable, price_description, repeat_time, create_time, 
+    update_time, create_by, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from api
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from api
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.boot.bo.ApiBo" >
+    insert into api (id, api_name, api_type, 
+      api_group, is_free, description, 
+      business, is_web, is_open, 
+      level, price, api_category, 
+      is_auth, request_sample, return_sample, 
+      up_or_down, small_icon, big_icon, 
+      category_id, pid, cost_type, 
+      disable, price_description, repeat_time, 
+      create_time, update_time, create_by, 
+      update_by)
+    values (#{id,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR}, #{apiType,jdbcType=VARCHAR}, 
+      #{apiGroup,jdbcType=VARCHAR}, #{isFree,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{business,jdbcType=VARCHAR}, #{isWeb,jdbcType=VARCHAR}, #{isOpen,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{apiCategory,jdbcType=VARCHAR}, 
+      #{isAuth,jdbcType=INTEGER}, #{requestSample,jdbcType=VARCHAR}, #{returnSample,jdbcType=VARCHAR}, 
+      #{upOrDown,jdbcType=VARCHAR}, #{smallIcon,jdbcType=VARCHAR}, #{bigIcon,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR}, #{costType,jdbcType=VARCHAR}, 
+      #{disable,jdbcType=VARCHAR}, #{priceDescription,jdbcType=VARCHAR}, #{repeatTime,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.boot.bo.ApiBo" >
+    insert into api
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="apiName != null" >
+        api_name,
+      </if>
+      <if test="apiType != null" >
+        api_type,
+      </if>
+      <if test="apiGroup != null" >
+        api_group,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="business != null" >
+        business,
+      </if>
+      <if test="isWeb != null" >
+        is_web,
+      </if>
+      <if test="isOpen != null" >
+        is_open,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="apiCategory != null" >
+        api_category,
+      </if>
+      <if test="isAuth != null" >
+        is_auth,
+      </if>
+      <if test="requestSample != null" >
+        request_sample,
+      </if>
+      <if test="returnSample != null" >
+        return_sample,
+      </if>
+      <if test="upOrDown != null" >
+        up_or_down,
+      </if>
+      <if test="smallIcon != null" >
+        small_icon,
+      </if>
+      <if test="bigIcon != null" >
+        big_icon,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="costType != null" >
+        cost_type,
+      </if>
+      <if test="disable != null" >
+        disable,
+      </if>
+      <if test="priceDescription != null" >
+        price_description,
+      </if>
+      <if test="repeatTime != null" >
+        repeat_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiType != null" >
+        #{apiType,jdbcType=VARCHAR},
+      </if>
+      <if test="apiGroup != null" >
+        #{apiGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="business != null" >
+        #{business,jdbcType=VARCHAR},
+      </if>
+      <if test="isWeb != null" >
+        #{isWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null" >
+        #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="apiCategory != null" >
+        #{apiCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null" >
+        #{isAuth,jdbcType=INTEGER},
+      </if>
+      <if test="requestSample != null" >
+        #{requestSample,jdbcType=VARCHAR},
+      </if>
+      <if test="returnSample != null" >
+        #{returnSample,jdbcType=VARCHAR},
+      </if>
+      <if test="upOrDown != null" >
+        #{upOrDown,jdbcType=VARCHAR},
+      </if>
+      <if test="smallIcon != null" >
+        #{smallIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="bigIcon != null" >
+        #{bigIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="costType != null" >
+        #{costType,jdbcType=VARCHAR},
+      </if>
+      <if test="disable != null" >
+        #{disable,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDescription != null" >
+        #{priceDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatTime != null" >
+        #{repeatTime,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.bo.ApiBo" >
+    update api
+    <set >
+      <if test="apiName != null" >
+        api_name = #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiType != null" >
+        api_type = #{apiType,jdbcType=VARCHAR},
+      </if>
+      <if test="apiGroup != null" >
+        api_group = #{apiGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="business != null" >
+        business = #{business,jdbcType=VARCHAR},
+      </if>
+      <if test="isWeb != null" >
+        is_web = #{isWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null" >
+        is_open = #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="apiCategory != null" >
+        api_category = #{apiCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="isAuth != null" >
+        is_auth = #{isAuth,jdbcType=INTEGER},
+      </if>
+      <if test="requestSample != null" >
+        request_sample = #{requestSample,jdbcType=VARCHAR},
+      </if>
+      <if test="returnSample != null" >
+        return_sample = #{returnSample,jdbcType=VARCHAR},
+      </if>
+      <if test="upOrDown != null" >
+        up_or_down = #{upOrDown,jdbcType=VARCHAR},
+      </if>
+      <if test="smallIcon != null" >
+        small_icon = #{smallIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="bigIcon != null" >
+        big_icon = #{bigIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="costType != null" >
+        cost_type = #{costType,jdbcType=VARCHAR},
+      </if>
+      <if test="disable != null" >
+        disable = #{disable,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDescription != null" >
+        price_description = #{priceDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatTime != null" >
+        repeat_time = #{repeatTime,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boot.bo.ApiBo" >
+    update api
+    set api_name = #{apiName,jdbcType=VARCHAR},
+      api_type = #{apiType,jdbcType=VARCHAR},
+      api_group = #{apiGroup,jdbcType=VARCHAR},
+      is_free = #{isFree,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      business = #{business,jdbcType=VARCHAR},
+      is_web = #{isWeb,jdbcType=VARCHAR},
+      is_open = #{isOpen,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      api_category = #{apiCategory,jdbcType=VARCHAR},
+      is_auth = #{isAuth,jdbcType=INTEGER},
+      request_sample = #{requestSample,jdbcType=VARCHAR},
+      return_sample = #{returnSample,jdbcType=VARCHAR},
+      up_or_down = #{upOrDown,jdbcType=VARCHAR},
+      small_icon = #{smallIcon,jdbcType=VARCHAR},
+      big_icon = #{bigIcon,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=VARCHAR},
+      cost_type = #{costType,jdbcType=VARCHAR},
+      disable = #{disable,jdbcType=VARCHAR},
+      price_description = #{priceDescription,jdbcType=VARCHAR},
+      repeat_time = #{repeatTime,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByApiGroup" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from api
+    where api_group = #{apiGroup,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

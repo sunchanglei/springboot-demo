@@ -1,0 +1,5 @@
+spring:
+  profiles: #激活环境配置文件spring:
+    active: dev
+  jackson: #公共配置
+    date-format: yyyy-MM-dd HH:mm:ss
