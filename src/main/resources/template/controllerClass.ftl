@@ -13,10 +13,13 @@ public class ${className?cap_first}Controller {
     @Autowired
     private I${className?cap_first}Service ${className}Service;
 
-    @RequestMapping(value = "/testJdbc",method = RequestMethod.GET)
-    int testJdbc() {
+	/**
+ 	 * 查询列表。
+ 	 */
+    @RequestMapping(value = "/listByParam",method = RequestMethod.GET)
+    List<${className?cap_first}Vo> listByParam(HttpServletRequest request, HttpServletResponse response) {
         try {
-            return demoService.testJdbc();
+            return ${className}Service.listByParam();
         } catch (Exception e){
             logger.error("",e);
         }

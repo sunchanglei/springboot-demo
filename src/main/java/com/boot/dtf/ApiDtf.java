@@ -1,6 +1,7 @@
 package com.boot.dtf;
 
 import com.boot.bo.ApiBo;
+import com.boot.utils.BeanUtil;
 import com.boot.vo.ApiVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,22 +18,10 @@ public class ApiDtf {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    public static List<ApiVo> toApiVo(List<ApiBo> boList){
+    public static ApiVo toApiVo(ApiBo bo){
 
-        if(boList == null || boList.isEmpty()){
-            return new ArrayList<>();
-        }
-
-        List<ApiVo>  voList = new ArrayList<>();
-        boList.forEach(
-            bo -> {
-                ApiVo vo = new ApiVo();
-                vo.setId(bo.getId());
-                vo.setApiName(bo.getApiName());
-                voList.add(vo);
-            }
-        );
-
-        return voList;
+        ApiVo vo = new ApiVo();
+        BeanUtil.copy(vo,bo);
+        return vo;
     }
 }

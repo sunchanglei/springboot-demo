@@ -1,5 +1,9 @@
 package ${packageName}.vo;
 
+/**
+ * ${classDesc}（应用端字段-VO）
+ * @author yunfan.
+ */
 @Setter
 @Getter
 @ToString

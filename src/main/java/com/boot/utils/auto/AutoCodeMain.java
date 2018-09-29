@@ -1,4 +1,4 @@
-package com.boot.utils;
+package com.boot.utils.auto;
 
 import java.util.HashMap;
 import java.util.Map;

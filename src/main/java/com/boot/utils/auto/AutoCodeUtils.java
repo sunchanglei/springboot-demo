@@ -1,5 +1,6 @@
-package com.boot.utils;
+package com.boot.utils.auto;
 
+import com.boot.utils.StringUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;
@@ -125,7 +126,7 @@ public class AutoCodeUtils {
 
         for (Table table : tableList){
             String className = underlineToCamel(table.getTableName());
-            String fileName = firstToUpper(className);
+            String fileName = StringUtil.upperFirstCase(className);
             List<Field> columnList = getColumns(table.getTableName());
             //设置模板文件路径
             Map<String, Object> rootMap = new HashMap<String, Object>();
@@ -385,10 +386,5 @@ public class AutoCodeUtils {
             }
         }
         return sb.toString();
-    }
-
-    public static String firstToUpper(String s){
-
-        return s.substring(0,1).toUpperCase()+s.substring(1);
     }
 }

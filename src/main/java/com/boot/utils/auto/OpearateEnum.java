@@ -1,4 +1,4 @@
-package com.boot.utils;
+package com.boot.utils.auto;
 
 public enum OpearateEnum {
 

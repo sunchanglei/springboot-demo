@@ -1,15 +1,15 @@
 package com.boot.controller;
 
 
+import com.boot.comm.ResponseMap;
+import com.boot.exception.BizException;
 import com.boot.service.IDemoService;
 import com.boot.vo.ApiVo;
+import com.boot.comm.RequestMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +30,19 @@ public class DemoController {
 
     @Autowired
     private IDemoService demoService;
+
+    @RequestMapping(value = "listByAll",method = RequestMethod.GET)
+    public ResponseMap listByAll(@RequestBody RequestMap requestMap) {
+        try {
+            return demoService.listByAll(requestMap);
+        } catch (BizException e){
+            logger.error("业务异常：",e);
+        } catch (Exception e){
+            logger.error("系统异常：",e);
+        }
+
+        return null;
+    }
 
     @RequestMapping(value = "/testJdbc",method = RequestMethod.GET)
     public int testJdbc() {
@@ -58,6 +71,7 @@ public class DemoController {
     @ResponseBody
     public String count(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {  //把sessionId记录在浏览器
+            httpServletRequest.getParameter("param");
             Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(httpServletRequest.getSession().getId(), "utf-8"));
             c.setPath("/");
             //先设置cookie有效期为2天，不用担心，session不会保存2天

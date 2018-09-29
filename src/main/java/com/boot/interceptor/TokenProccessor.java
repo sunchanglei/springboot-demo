@@ -5,6 +5,7 @@ import sun.misc.BASE64Encoder;
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Random;
 
 /**
@@ -43,8 +44,7 @@ public class TokenProccessor {
             MessageDigest md = MessageDigest.getInstance("md5");
             byte md5[] =  md.digest(token.getBytes());
             //base64编码--任意二进制编码明文字符   adfsdfsdfsf
-            BASE64Encoder encoder = new BASE64Encoder();
-            return encoder.encode(md5);
+            return Base64.getEncoder().encodeToString(md5);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

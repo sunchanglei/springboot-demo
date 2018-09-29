@@ -62,6 +62,7 @@ public class LogAspect {
         System.out.println("方法环绕start.....");  //执行顺序 第二
         try {
             Object o =  pjp.proceed();
+            System.out.println("可以用来处理query_history表");  //执行顺序 第四
             System.out.println("方法环绕proceed，结果是 :" + o);//执行顺序 第四
             return o;
         } catch (Throwable e) {

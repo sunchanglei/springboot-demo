@@ -1,5 +1,10 @@
 package ${packageName}.bo;
 
+
+/**
+ * ${classDesc}（数据库字段映射-BO）
+ * @author yunfan.
+ */
 @Setter
 @Getter
 @ToString
