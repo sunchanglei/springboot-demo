@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by yunfun on 2018/7/23.
  */
 @Repository
-public class ApiDao {
+public class ApiDao extends CommDao {
 
     @Autowired
     private JdbcTemplate yhJdbcTemplate;

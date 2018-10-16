@@ -1,7 +1,7 @@
 package ${packageName}.controller;
 
 /**
- * ${classDesc}（控制层）
+ * ${classDesc}。
  * @author yufan
  */
 @RestController
@@ -13,28 +13,21 @@ public class ${className?cap_first}Controller {
     @Autowired
     private I${className?cap_first}Service ${className}Service;
 
-	/**
- 	 * 查询列表。
+    <#list methodList as method>
+    /**
+ 	 * ${method.comment}。
  	 */
-    @RequestMapping(value = "/listByParam",method = RequestMethod.GET)
-    List<${className?cap_first}Vo> listByParam(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/${method.name}",method = RequestMethod.GET)
+    public ResponseMap ${method.name}(@RequestBody RequestMap requestMap) {
         try {
-            return ${className}Service.listByParam();
+            return ${className}Service.${method.name}(requestMap);
+        } catch (BizException e){
+            logger.error("业务异常：",e);
         } catch (Exception e){
-            logger.error("",e);
+            logger.error("系统异常：",e);
         }
-        return 0;
+        return null;
     }
+    </#list>
 
-    @RequestMapping("/testMybatis")
-    List<ApiVo> testMybatis() {
-    try {
-		logger.info("测试Mybatis开始了.....");
-    	return demoService.testMybatis();
-    } catch (Exception e){
-    	logger.error("",e);
-    	return new ArrayList<>();
-    }
 }
-
-    }

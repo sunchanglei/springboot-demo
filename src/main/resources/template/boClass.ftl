@@ -2,7 +2,7 @@ package ${packageName}.bo;
 
 
 /**
- * ${classDesc}（数据库字段映射-BO）
+ * ${classDesc}BO。
  * @author yunfan.
  */
 @Setter
@@ -10,8 +10,8 @@ package ${packageName}.bo;
 @ToString
 public class ${className?cap_first}Bo {
 
-	<#list columnList as filed>
-	/** ${filed.comment} */
-	private ${filed.colType} ${filed.colName};
+	<#list columnList as field>
+	/** ${field.comment} */
+	private ${field.colType} ${field.colName};
 	</#list>
 }

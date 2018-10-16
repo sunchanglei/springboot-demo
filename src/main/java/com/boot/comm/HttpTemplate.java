@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * HTTP共通类
- * Created by YScredit on 2018/3/17.
+ * Created by yunfan on 2018/3/17.
  */
 @Component
 public class HttpTemplate {

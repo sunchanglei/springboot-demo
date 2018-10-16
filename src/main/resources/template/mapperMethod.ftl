@@ -1,66 +1,74 @@
-<#if method.colType == "list_one">
+<#list methodList as method>
+    <#if method.type == "list_one">
+    /**
+     * ${method.comment}。
+        <#list method.params as param>
+     * @param ${param.name} ${param.comment}
+        </#list>
+     */
+    public List<${className?cap_first}Bo> listBy${method.params[0].name?cap_first}(@Param("${method.params[0].name}") ${method.params[0].type} ${method.params[0].name});
+    <#elseif method.type == "list_two">
+    /**
+     * ${method.comment}。
+        <#list method.params as param>
+     * @param ${param.name} ${param.comment}
+        </#list>
+     */
+    public List<${className?cap_first}Bo> listBy${method.params[0].name?cap_first}And${method.params[1].name?cap_first}(@Param("${method.params[0].name}") ${method.params[0].type} ${method.params[0].name},@Param("${method.params[1].name}") ${method.params[1].type} ${method.params[1].name});
+    <#elseif method.type == "list_three">
     /**
      * 查询${method.comment}信息列表。
-     * @param ${args.pone.colName} ${args.pone.comment}
+        <#list method.params as param>
+     * @param ${param.name} ${param.comment}
+        </#list>
      */
-    public List<${method.colName?cap_first}Bo> listBy${args.pone.colName?cap_first}(@Param("${args.pone.colName}") ${args.pone.colType} ${args.pone.colName});
-<#elseif method.colType == "list_two">
+    public List<${className?cap_first}Bo> listBy${method.params[0].name?cap_first}And${method.params[1].name?cap_first}And${method.params[2].name?cap_first}(@Param("${method.params[0].name}") ${method.params[0].type} ${method.params[0].name},@Param("${method.params[1].name}") ${method.params[1].type} ${method.params[1].name},@Param("${method.params[2].name}") ${method.params[2].type} ${method.params[2].name});
+    <#elseif method.type == "list_all">
     /**
-     * 查询${method.comment}信息列表。
-     * @param ${args.pone.colName} ${args.pone.comment}
-     * @param ${args.ptwo.colName} ${args.ptwo.comment}
+     * 查询全部${method.comment}。
      */
-    public List<${method.colName?cap_first}Bo> listBy${args.pone.colName?cap_first}And${args.ptwo.colName?cap_first}(@Param("${args.pone.colName}") ${args.pone.colType} ${args.pone.colName},@Param("${args.ptwo.colName}") ${args.ptwo.colType} ${args.ptwo.colName});
-<#elseif method.colType == "list_three">
+    public List<${className?cap_first}Bo> listByAll();
+    <#elseif method.type == "list_more">
     /**
-     * 查询${method.comment}信息列表。
-     * @param ${args.pone.colName} ${args.pone.comment}
-     * @param ${args.ptwo.colName} ${args.ptwo.comment}
-     * @param ${args.pthree.colName} ${args.pthree.comment}
-     */
-    public List<${method.colName?cap_first}Bo> listBy${args.pone.colName?cap_first}And${args.ptwo.colName?cap_first}And${args.pthree.colName?cap_first}(@Param("${args.pone.colName}") ${args.pone.colType} ${args.pone.colName},@Param("${args.ptwo.colName}") ${args.ptwo.colType} ${args.ptwo.colName},@Param("${args.pthree.colName}") ${args.pthree.colType} ${args.pthree.colName});
-<#elseif method.colType == "list_all">
-    /**
-     * 查询${method.comment}全部信息列表。
-     */
-    public List<${method.colName?cap_first}Bo> listByAll();
-<#elseif method.colType == "list_more">
-    /**
-     * 查询${method.comment}信息列表。
+     * 查询${method.comment}。
      * @param bo ${method.comment}Bo
      */
-    public List<${method.colName?cap_first}Bo> listBy${method.colName?cap_first}Bo(${method.colName?cap_first}Bo bo);
-<#elseif method.colType == "count_one" >
+    public List<${className?cap_first}Bo> listBy${className?cap_first}Bo(${className?cap_first}Bo bo);
+    <#elseif method.type == "count_one" >
     /**
      * 查询${method.comment}信息。
-     * @param ${args.pone.colName} ${args.pone.comment}
+        <#list method.params as param>
+     * @param ${param.name} ${param.comment}
+        </#list>
      */
-    public int countBy${args.pone.colName?cap_first}(@Param("${args.pone.colName}") ${args.pone.colType} ${args.pone.colName});
-<#elseif method.colType == "count_two" >
+    public int countBy${method.params[0].name?cap_first}(@Param("${method.params[0].name}") ${method.params[0].type} ${method.params[0].name});
+    <#elseif method.type == "count_two" >
     /**
      * 查询${method.comment}信息。
-     * @param ${args.pone.colName} ${args.pone.comment}
-     * @param ${args.ptwo.colName} ${args.ptwo.comment}
+        <#list method.params as param>
+     * @param ${param.name} ${param.comment}
+        </#list>
      */
-    public int countBy${args.pone.colName?cap_first}And${args.ptwo.colName?cap_first}(@Param("${args.pone.colName}") ${args.pone.colType} ${args.pone.colName},@Param("${args.ptwo.colName}") ${args.ptwo.colType} ${args.ptwo.colName});
-<#elseif method.colType == "count_three" >
+    public int countBy${method.params[0].name?cap_first}And${method.params[1].name?cap_first}(@Param("${method.params[0].name}") ${method.params[0].type} ${method.params[0].name},@Param("${method.params[1].name}") ${method.params[1].type} ${method.params[1].name});
+    <#elseif method.type == "count_three" >
     /**
      * 查询${method.comment}信息。
-     * @param ${args.pone.colName} ${args.pone.comment}
-     * @param ${args.ptwo.colName} ${args.ptwo.comment}
-     * @param ${args.pthree.colName} ${args.pthree.comment}
+        <#list method.params as param>
+     * @param ${param.name} ${param.comment}
+        </#list>
      */
-    public int countBy${args.pone.colName?cap_first}And${args.ptwo.colName?cap_first}And${args.pthree.colName?cap_first}(@Param("${args.pone.colName}") ${args.pone.colType} ${args.pone.colName},@Param("${args.ptwo.colName}") ${args.ptwo.colType} ${args.ptwo.colName},@Param("${args.pthree.colName}") ${args.pthree.colType} ${args.pthree.colName});
-<#elseif method.colType == "count_more">
+    public int countBy${method.params[0].name?cap_first}And${method.params[1].name?cap_first}And${method.params[2].name?cap_first}(@Param("${method.params[0].name}") ${method.params[0].type} ${method.params[0].name},@Param("${method.params[1].name}") ${method.params[1].type} ${method.params[1].name},@Param("${method.params[2].name}") ${method.params[2].type} ${method.params[2].name});
+    <#elseif method.type == "count_more">
     /**
-     * 查询${method.comment}信息列表。
+     * 统计${method.comment}。
      * @param bo ${method.comment}Bo
      */
-    public int countBy${method.colName?cap_first}Bo(${method.colName?cap_first}Bo bo);
-<#elseif method.colType == "update">
+    public int countBy${className?cap_first}Bo(${className?cap_first}Bo bo);
+    <#elseif method.type == "update">
     /**
      * 更新${method.comment}信息。
      * @param bo ${method.comment}Bo
      */
-    public int updateBy${method.colName?cap_first}Bo(${method.colName?cap_first}Bo bo);
-</#if>
+    public int updateBy${className?cap_first}Bo(${className?cap_first}Bo bo);
+    </#if>
+</#list>

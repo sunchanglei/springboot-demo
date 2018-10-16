@@ -1,7 +1,7 @@
 package ${packageName}.vo;
 
 /**
- * ${classDesc}（应用端字段-VO）
+ * ${classDesc}VO。
  * @author yunfan.
  */
 @Setter
@@ -11,8 +11,8 @@ public class ${className?cap_first}Vo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	<#list columnList as filed>
-	/** ${filed.comment} */
-	private ${filed.colType} ${filed.colName};
+	<#list columnList as field>
+	/** ${field.comment} */
+	private ${field.colType} ${field.colName};
 	</#list>
 }

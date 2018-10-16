@@ -92,8 +92,10 @@ public class DateUtil {
         if (date == null || StringUtil.isEmpty(date.toString()) || EMPTY_DATE.equals(date.toString())) {
             return "";
         }
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern(format);// 性能更优
         String d = "";
+
         try {
             d = sdf.format(date);
         } catch (Exception e) {

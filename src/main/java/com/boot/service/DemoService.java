@@ -20,7 +20,7 @@ import java.util.List;
  * Created by yunfan on 2018/7/20.
  */
 @Service
-public class DemoService implements IDemoService{
+public class DemoService implements IDemoService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -46,7 +46,6 @@ public class DemoService implements IDemoService{
 
     @Override
     public List<ApiVo> testMybatis(){
-
         List<ApiBo> boList = apiDao.findByApiGroup("A0");
         if(boList == null || boList.isEmpty()){
             return new ArrayList<>();

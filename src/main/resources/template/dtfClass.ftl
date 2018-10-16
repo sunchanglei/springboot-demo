@@ -1,7 +1,7 @@
 package ${packageName}.dtf;
 
 /**
- * ${classDesc}（数据转换）
+ * ${classDesc}Dtf。
  * @author yunfan.
  */
 public class ${className?cap_first}Dtf {

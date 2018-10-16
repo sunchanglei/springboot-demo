@@ -1,7 +1,7 @@
 package ${packageName}.dao;
 
 /**
- * ${classDesc}（数据层）
+ * ${classDesc}Dao。
  */
 @Repository
 public class ${className?cap_first}Dao {
@@ -9,46 +9,21 @@ public class ${className?cap_first}Dao {
 	@Autowired
     private ${className?cap_first}Mapper ${className}Mapper;
 
-	/**
- 	 * 查询列表。
+	<#list methodList as method>
+    /**
+ 	 * ${method.comment}。
  	 */
-	public List<${className?cap_first}Bo> listByParam(String param) {
-		return ${className}Mapper.listByParam(param);
+	public ${method.retType} ${method.name}(${method.paramTypeStr}) {
+		return ${className}Mapper.${method.name}(${method.paramStr});
 	}
+	</#list>
 
-    /**
-     * 查询明细。
-     */
-    public ${className?cap_first}Bo selectByParam(String param) {
-		return ${className}Mapper.selectByParam(param);
-	}
+    public static ${className?cap_first}Vo to${className?cap_first}Vo(${className?cap_first}Bo bo){
 
-    /**
-     * 查询明细。
-     */
-    public ${className?cap_first}Bo selectById(Integer id) {
-    	return ${className}Mapper.selectByPrimaryKey(id);
-    }
+		${className?cap_first}Vo vo = new ${className?cap_first}Vo();
+		BeanUtil.copy(vo,bo);
 
-	/**
-	 * 插入数据。
-	 */
-    public int insert(${className?cap_first}Bo bo) {
-    	return ${className}Mapper.insertSelective(bo);
-	}
-
-    /**
-     * 修改数据。
-     */
-    public int update(${className?cap_first}Bo bo) {
-    	return ${className}Mapper.updateByPrimaryKeySelective(bo);
-	}
-
-    /**
-     * 删除数据。（逻辑删除）
-     */
-    public int delete(${className?cap_first}Bo bo) {
-    	return ${className}Mapper.updateByPrimaryKeySelective(bo);
+		return vo;
 	}
 
 }

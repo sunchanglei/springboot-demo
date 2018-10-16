@@ -1,17 +1,8 @@
 package com.boot.mapper;
 
-import com.boot.bo.User;
+import com.boot.bo.UserBo;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(String userName);
+public interface UserMapper extends BaseMapper<UserBo>{
 
-    int insert(User record);
 
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(String userName);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
 }

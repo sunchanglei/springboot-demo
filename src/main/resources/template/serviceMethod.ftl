@@ -1,4 +1,6 @@
+<#list methodList as method>
     /**
-     * ${methodDesc}。
-     */
-    public ${methodType} ${methodDesc}(${className?cap_first}Bo bo);
+ 	 * ${method.comment}。
+ 	 */
+	ResponseMap ${method.name}(RequestMap requestMap) throws Exception;
+</#list>

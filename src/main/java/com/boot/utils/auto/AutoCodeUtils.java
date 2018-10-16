@@ -47,57 +47,6 @@ public class AutoCodeUtils {
     private String packageName;
     private String templateDir;
     private String srcFile;
-    private static String[][] fileNameArray = new String[7][3];
-    static {
-        fileNameArray[0][0] = "dtfClass.ftl";
-        fileNameArray[0][1] = "Dtf.java";
-        fileNameArray[0][2] = "dtf";
-
-        fileNameArray[1][0] = "serviceClass.ftl";
-        fileNameArray[1][1] = "Service.java";
-        fileNameArray[1][2] = "service";
-
-        fileNameArray[2][0] = "serviceImplClass.ftl";
-        fileNameArray[2][1] = "ServiceImpl.java";
-        fileNameArray[2][2] = "serviceImpl";
-
-        fileNameArray[3][0] = "daoClass.ftl";
-        fileNameArray[3][1] = "Dao.java";
-        fileNameArray[3][2] = "dao";
-
-        fileNameArray[4][0] = "voClass.ftl";
-        fileNameArray[4][1] = "Vo.java";
-        fileNameArray[4][2] = "vo";
-
-        fileNameArray[5][0] = "boClass.ftl";
-        fileNameArray[5][1] = "Bo.java";
-        fileNameArray[5][2] = "bo";
-
-        fileNameArray[6][0] = "mapperClass.ftl";
-        fileNameArray[6][1] = "Mapper.java";
-        fileNameArray[6][2] = "mapper";
-    }
-
-    private static String[][] methodArray = new String[1][2];
-    static {
-//        methodArray[0][0] = "controllerMethod.ftl";
-//        methodArray[0][1] = "Controller.java";
-//
-//        methodArray[1][0] = "dtfMethod.ftl";
-//        methodArray[1][1] = "Dtf.java";
-//
-//        methodArray[2][0] = "serviceMethod.ftl";
-//        methodArray[2][1] = "Service.java";
-//
-//        methodArray[3][0] = "serviceImplMethod.ftl";
-//        methodArray[3][1] = "ServiceImpl.java";
-//
-//        methodArray[4][0] = "daoMethod.ftl";
-//        methodArray[4][1] = "Dao.java";
-
-        methodArray[0][0] = "mapperMethod.ftl";
-        methodArray[0][1] = "Mapper.java";
-    }
 
     public AutoCodeUtils(ConnDB connDB, String packageName, String[] tableNames,String srcFile, String templateDir) {
         this.connDB = connDB;
@@ -108,7 +57,7 @@ public class AutoCodeUtils {
     }
 
   
-    public void autoCreateCode() throws Exception {
+    public void autoCreateCode(String[] fileNameArray,List<Method> methodList) throws Exception {
         Configuration cfg = new Configuration();
         cfg.setDefaultEncoding("utf-8");
         cfg.setDirectoryForTemplateLoading(new File(templateDir));
@@ -126,31 +75,37 @@ public class AutoCodeUtils {
 
         for (Table table : tableList){
             String className = underlineToCamel(table.getTableName());
-            String fileName = StringUtil.upperFirstCase(className);
             List<Field> columnList = getColumns(table.getTableName());
             //设置模板文件路径
             Map<String, Object> rootMap = new HashMap<String, Object>();
             rootMap.put("packageName", packageName);
+            rootMap.put("tableName", table);
             rootMap.put("className", className);
             rootMap.put("classDesc", table.getTableComment());
             rootMap.put("columnList", columnList);
+            rootMap.put("methodList", methodList);
 
             for (int i = 0; i < fileNameArray.length; i++) {
                 String pre = "";
-                if (fileNameArray[i][1].equals("Service.java")){
+                if (fileNameArray[i].equals("service")){
                     pre = "I";
                 }
 
-                String newFile = srcFile +"\\"+fileNameArray[i][2];
+                String newFile = srcFile +"\\"+fileNameArray[i];
                 File dir2 = new File(newFile + "\\");
                 //检查目录是否存在，不存在则创建
                 if (!dir2.exists()) {
                     dir2.mkdir();
                 }
 
-                File docFile = new File(newFile+ "\\" +pre+ fileName + fileNameArray[i][1]);
+                String fileName = pre+ StringUtil.upperFirstCase(className) + StringUtil.upperFirstCase(fileNameArray[i]) + ".java";
+                File docFile = new File(newFile+ "\\" +fileName);
+                if(docFile.exists()){
+                    System.out.println("==============文件已经存在请检查后重试===============");
+                    continue;
+                }
                 Writer docout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
-                Template temp = cfg.getTemplate(fileNameArray[i][0]);
+                Template temp = cfg.getTemplate(fileNameArray[i]+"Class.ftl");
                 temp.process(rootMap, docout);//输出文件
                 docout.close();
             }
@@ -158,8 +113,7 @@ public class AutoCodeUtils {
         System.out.println("==============文件生产成功===============");
     }
 
-    public void autoAddCode(String tableName,Map<String, Object> rootMap) throws Exception {
-
+    public void autoAddCode(String tableName,String[] methodArray,List<Method> methodList) throws Exception {
         Configuration cfg = new Configuration();
         cfg.setDefaultEncoding("utf-8");
         cfg.setDirectoryForTemplateLoading(new File(templateDir));
@@ -171,12 +125,20 @@ public class AutoCodeUtils {
             return;
         }
 
-        for (int i = 0; i < methodArray.length; i++){
+        String className = underlineToCamel(tableName);
+        //设置模板文件路径
+        Map<String, Object> rootMap = new HashMap<String, Object>();
+        rootMap.put("packageName", packageName);
+        rootMap.put("className", className);
+        rootMap.put("tableName", tableName);
+        rootMap.put("methodList", methodList);
 
+        for (int i = 0; i < methodArray.length; i++){
             String pre = "";
-            if (methodArray[i][1].equals("Service.java")){
+            if (methodArray[i].equals("service")){
                 pre = "I";
             }
+            String fileName = pre + StringUtil.upperFirstCase(className) + StringUtil.upperFirstCase(methodArray[i]) + ".java";
 
             File dir3 = new File(srcFile + "\\temp\\");
             //检查目录是否存在，不存在则创建
@@ -184,17 +146,36 @@ public class AutoCodeUtils {
                 dir3.mkdir();
             }
 
-            File tmpFile = new File(srcFile +"\\temp\\" +pre+ tableName + methodArray[i][1]);
+            File tmpFile = new File(srcFile +"\\temp\\" +pre+ fileName);
             Writer docout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmpFile)));
 
-            Template temp = cfg.getTemplate(methodArray[i][0]);
+            Template temp = cfg.getTemplate(methodArray[i]+"Method.ftl");
             temp.process(rootMap, docout);//输出文件
             docout.close(); // 关闭文件流
 
-            File toFile = new File(srcFile +"\\mapper"+"\\"+pre+ tableName + methodArray[i][1]);
-            copyFile(toFile,tmpFile);// 追加内容
+            File toFile = new File(srcFile +"\\"+methodArray[i]+"\\"+fileName);
+            copyFile(toFile,tmpFile,"}\r\n");// 追加内容
             tmpFile.delete(); // 删除临时文件
             dir3.delete();// 删除临时文件夹
+
+            if("mapper".equals(methodArray[i])){
+                String fileName2 = pre + StringUtil.upperFirstCase(className) + StringUtil.upperFirstCase(methodArray[i]) + ".xml";
+                File dir32 = new File(srcFile + "\\temp\\");
+                //检查目录是否存在，不存在则创建
+                if (!dir32.exists()) {
+                    dir32.mkdir();
+                }
+                File tmpFile2 = new File(srcFile +"\\temp\\" +pre+ fileName2);
+                Writer docout2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmpFile2)));
+                Template temp2 = cfg.getTemplate(methodArray[i]+"Xml.ftl");
+                temp2.process(rootMap, docout2);//输出文件
+                docout2.close(); // 关闭文件流
+
+                File toFile2 = new File(srcFile +"\\"+methodArray[i]+"\\"+fileName2);
+                copyFile(toFile2,tmpFile2,"</mapper>\r\n");// 追加内容
+                tmpFile2.delete(); // 删除临时文件
+                dir32.delete();// 删除临时文件夹
+            }
         }
 
         System.out.println("==============文件追加成功===============");
@@ -203,7 +184,7 @@ public class AutoCodeUtils {
     /**
      * 文件最后追加。
      */
-    private static void copyFile(File toFile, File fromFile) throws Exception{
+    private static void copyFile(File toFile, File fromFile,String endStr) throws Exception{
         BufferedReader readTo = null;
         BufferedReader readFrom = null;
         FileWriter write = null;
@@ -228,7 +209,7 @@ public class AutoCodeUtils {
                 write.write(tempFrom+"\r\n");
             }
 
-            write.write("}\r\n");
+            write.write(endStr);
 
             System.out.println("---- 插入完毕 ----");
             write.close();

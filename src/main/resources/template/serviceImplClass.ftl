@@ -13,58 +13,35 @@ public class ${className?cap_first}ServiceImpl implements I${className?cap_first
 	@Autowired
 	private ${className?cap_first}Dtf ${className}Dtf;
 
+    <#list methodList as method>
 	/**
- 	 * 查询列表。
+ 	 * ${method.comment}。
  	 */
-	public List<${className?cap_first}Vo> listByParam(String param) {
+	public ResponseMap ${method.name}(RequestMap requestMap) throws Exception {
+
+        <#if method.params??>
+        // 参数校验：
+        <#list method.params as param>
+        String ${param.name} = requestMap.getStringValueRequired("${param.desc}", "${param.name}");
+        </#list>
+        </#if>
 
         // 数据查询：
-        List<${className?cap_first}Bo> boList = ${className}Dao.listByParam(param);
+        List<${className?cap_first}Bo> boList = ${className}Dao.${method.name}(${method.paramStr});
         if (boList == null || boList.isEmpty()){
-            return new ArrayList();
+            return new ResponseMap();
         }
 
-        // 数据转换：
+        // 数据解析：
         List<${className?cap_first}Vo> voList = new ArrayList();
         for (${className?cap_first}Bo bo : boList){
             voList.add(${className}Dtf.to${className?cap_first}Vo(bo));
         }
 
-    	return voList;
+        // 结果返回：
+        ResponseMap resMap = new ResponseMap();
+        resMap.put("${method.retName}",voList);//${method.retDesc}
+        return resMap;
     }
-
-    /**
-     * 查询明细。
-     */
-    public ${className?cap_first}Bo selectByParam(String param) {
-    	return ${className}Dao.selectByParam(param);
-    }
-
-    /**
-     * 查询明细。
-     */
-    public ${className?cap_first}Bo selectById(Integer id) {
-    	return ${className}Dao.selectById(id);
-    }
-
-    /**
-     * 插入数据。
-     */
-    public int insert(${className?cap_first}Bo bo) {
-    	return ${className}Dao.insert(bo);
-    }
-
-    /**
-     * 修改数据。
-     */
-    public int update(${className?cap_first}Bo bo) {
-    	return ${className}Dao.update(bo);
-    }
-
-    /**
-     * 删除数据。（逻辑删除）
-     */
-    public int delete(${className?cap_first}Bo bo) {
-    	return ${className}Dao.delete(bo);
-    }
+    </#list>
 }
