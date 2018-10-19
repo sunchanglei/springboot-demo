@@ -3,14 +3,20 @@ package com.boot.dao;
 import com.boot.bo.ApiBo;
 import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
-
+/**
+ * 必须要指定DataSource,否则会加载出错。
+ *
+ */
 @Repository
 public class CommDao {
 
-    @Resource
+    @Autowired
+    private JdbcTemplate yhJdbcTemplate;
+    @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
     /* 数据库操作类型 **/
@@ -33,7 +39,7 @@ public class CommDao {
      * @param opt   操作
      * @return MapperXML路径
      */
-    private String getNameSpacePath(Class clazz, String opt) {
+    public String getNameSpacePath(Class clazz, String opt) {
         String name = clazz.getName().replace(".bo.", ".mapper.");
         return StringUtils.removeEnd(name,"Bo") + "Mapper." + opt;
     }

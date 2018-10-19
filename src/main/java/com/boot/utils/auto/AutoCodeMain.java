@@ -1,5 +1,7 @@
 package com.boot.utils.auto;
 
+import com.boot.utils.StringUtil;
+
 import java.util.*;
 
 public class AutoCodeMain {
@@ -73,5 +75,24 @@ public class AutoCodeMain {
         method.setRetDesc("");
 
         return method;
+    }
+
+    /**
+     * 创建方法名。
+     * @param type
+     * @param params
+     * @return
+     */
+    private String createMethodName(String type,String... params){
+        StringBuffer sb = new StringBuffer();
+        sb.append(type).append("By");
+        for (int i = 0; i < params.length; i++){
+            if(i > 1){
+                sb.append("_").append(StringUtil.upperFirstCase(params[i]));
+            } else {
+                sb.append(StringUtil.upperFirstCase(params[i]));
+            }
+        }
+        return sb.toString();
     }
 }

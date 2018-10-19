@@ -32,7 +32,9 @@ public class DemoController {
     private IDemoService demoService;
 
     @RequestMapping(value = "listByAll",method = RequestMethod.GET)
+    @ResponseBody
     public ResponseMap listByAll(@RequestBody RequestMap requestMap) {
+
         try {
             return demoService.listByAll(requestMap);
         } catch (BizException e){
@@ -64,6 +66,17 @@ public class DemoController {
         } catch (Exception e){
             logger.error("",e);
             return new ArrayList<>();
+        }
+    }
+
+    @RequestMapping("/testComm")
+    public ApiVo testComm(@RequestParam("id") String id) {
+        try {
+            logger.info("测试Mybatis开始了.....");
+            return demoService.testComm(id);
+        } catch (Exception e){
+            logger.error("",e);
+            return null;
         }
     }
 

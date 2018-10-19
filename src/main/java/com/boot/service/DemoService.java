@@ -2,9 +2,8 @@ package com.boot.service;
 
 import com.boot.bo.ApiBo;
 import com.boot.dao.ApiDao;
-import com.boot.dao.UserDao;
+import com.boot.dao.CommDao;
 import com.boot.dtf.ApiDtf;
-import com.boot.exception.BizException;
 import com.boot.vo.ApiVo;
 import com.boot.comm.RequestMap;
 import com.boot.comm.ResponseMap;
@@ -25,10 +24,10 @@ public class DemoService implements IDemoService {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private ApiDao apiDao;
+    private CommDao commDao;
 
     @Autowired
-    private UserDao userDao;
+    private ApiDao apiDao;
 
     @Override
     public int testJdbc(){
@@ -51,6 +50,8 @@ public class DemoService implements IDemoService {
             return new ArrayList<>();
         }
 
+        ApiBo xo = commDao.selectByPrimaryKey(ApiBo.class,"");
+
         List<ApiVo>  voList = new ArrayList<>();
         for (ApiBo bo : boList) {
             ApiVo vo = ApiDtf.toApiVo(bo);
@@ -61,11 +62,18 @@ public class DemoService implements IDemoService {
     }
 
     @Override
+    public ApiVo testComm(String id){
+
+        ApiBo bo = apiDao.selectByPrimaryKey(ApiBo.class,id);
+        ApiVo vo = ApiDtf.toApiVo(bo);
+        return vo;
+    }
+
+    @Override
     public ResponseMap listByAll(RequestMap requestMap) throws Exception{
 
         // 参数校验：
         String api = requestMap.getStringValueRequired("接口号", "api");
-
         // 数据查询：
         List<ApiBo> boList = apiDao.findByApiGroup(api);
         if(boList == null || boList.isEmpty()){

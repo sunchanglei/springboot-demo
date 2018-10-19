@@ -48,6 +48,7 @@ public class ApiDao extends CommDao {
     public List<ApiBo> findByApiGroup(String apiGroup){
 
 //        DatabaseContextHolder.setDatabaseType(DatabaseType.mytestdb);
+
         return apiMapper.selectByApiGroup(apiGroup);
     }
 }

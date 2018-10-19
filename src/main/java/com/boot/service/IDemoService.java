@@ -15,5 +15,7 @@ public interface IDemoService {
 
     List<ApiVo> testMybatis();
 
+    ApiVo testComm(String id);
+
     ResponseMap listByAll(RequestMap requestMap) throws Exception;
 }

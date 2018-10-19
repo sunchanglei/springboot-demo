@@ -1,5 +1,6 @@
 package com.boot.config;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,4 +22,5 @@ public class JdbcTemplateDemo {
     public JdbcTemplate ysJdbcTemplate(@Qualifier("mysqlYsDb") DataSource dsMySQL) {
         return new JdbcTemplate(dsMySQL);
     }
+
 }
