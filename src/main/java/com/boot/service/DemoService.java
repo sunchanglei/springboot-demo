@@ -71,9 +71,8 @@ public class DemoService implements IDemoService {
 
     @Override
     public ResponseMap listByAll(RequestMap requestMap) throws Exception{
-
         // 参数校验：
-        String api = requestMap.getStringValueRequired("接口号", "api");
+        String api = requestMap.getStringRequired("接口号", "api");
         // 数据查询：
         List<ApiBo> boList = apiDao.findByApiGroup(api);
         if(boList == null || boList.isEmpty()){

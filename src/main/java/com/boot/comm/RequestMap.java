@@ -51,7 +51,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public String getStringValueRequired(String name, String key) throws BizException{
+    public String getStringRequired(String name, String key) throws BizException{
         String value = StringUtil.toStringNotNull(this.get(key));
         if(value.isEmpty()){
             throw new BizException(String.format(Message.MSG_CHK_000001, name));
@@ -66,7 +66,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param mustInput 是否必须
      * @return name 返回值描述
      */
-    public String getStringValue(String name, String key, boolean mustInput) throws BizException{
+    public String getString(String name, String key, boolean mustInput) throws BizException{
         String value = StringUtil.toStringNotNull(this.get(key));
         if(mustInput && value.isEmpty()){
             throw new BizException(String.format(Message.MSG_CHK_000001, name));
@@ -82,7 +82,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param lengthRang 长度范围，只能是两位，超出则默认取两位
      * @return name 返回值描述
      */
-    public String getStringValue(String name, String key, boolean mustInput, int... lengthRang) throws BizException{
+    public String getString(String name, String key, boolean mustInput, int... lengthRang) throws BizException{
         String value = StringUtil.toStringNotNull(this.get(key));
         if(mustInput && value.isEmpty()){
             throw new BizException(String.format(Message.MSG_CHK_000001, name));
@@ -118,7 +118,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public Boolean getBooleanValueRequired(String name, String key) throws BizException{
+    public Boolean getBooleanRequired(String name, String key) throws BizException{
         Object value = this.get(key);
 
         if(value == null || value.toString().isEmpty()){
@@ -139,7 +139,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param mustInput 是否必须
      * @return name 返回值描述
      */
-    public Boolean getBooleanValue(String name, String key, boolean mustInput) throws BizException{
+    public Boolean getBoolean(String name, String key, boolean mustInput) throws BizException{
         Object value = this.get(key);
 
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -159,7 +159,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public Integer getIntegerValueRequired(String name, String key) throws BizException{
+    public Integer getIntegerRequired(String name, String key) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -180,7 +180,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param mustInput 是否必须
      * @return name 返回值描述
      */
-    public Integer getIntegerValue(String name, String key, boolean mustInput) throws BizException{
+    public Integer getInteger(String name, String key, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -200,7 +200,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param name 参数描述
      * @return name 返回值描述
      */
-    public Long getLongValueRequired(String name, String key) throws BizException{
+    public Long getLongRequired(String name, String key) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -220,7 +220,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param name 参数描述
      * @return name 返回值描述
      */
-    public Long getLongValue(String name, String key, boolean mustInput) throws BizException{
+    public Long getLong(String name, String key, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -240,7 +240,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public Float getFloatValueRequired(String name, String key) throws BizException{
+    public Float getFloatRequired(String name, String key) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -261,7 +261,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param mustInput 是否必须
      * @return name 返回值描述
      */
-    public Float getFloatValue(String name, String key, boolean mustInput) throws BizException{
+    public Float getFloat(String name, String key, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -281,7 +281,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public Double getDoubleValueRequired(String name, String key) throws BizException{
+    public Double getDoubleRequired(String name, String key) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -302,7 +302,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param mustInput 是否必须
      * @return name 返回值描述
      */
-    public Double getDoubleValue(String name, String key, boolean mustInput) throws BizException{
+    public Double getDouble(String name, String key, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -322,7 +322,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public BigDecimal getBigDecimalValueRequired(String name, String key) throws BizException{
+    public BigDecimal getBigDecimalRequired(String name, String key) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -343,7 +343,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param mustInput 是否必须
      * @return name 返回值描述
      */
-    public BigDecimal getBigDecimalValue(String name, String key, boolean mustInput) throws BizException{
+    public BigDecimal getBigDecimal(String name, String key, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -363,7 +363,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key       参数描述
      * @return name 返回值描述
      */
-    public Date getDateValueRequired(String name, String key) throws BizException{
+    public Date getDateRequired(String name, String key) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -385,7 +385,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @return name 返回值描述
      */
     @SuppressWarnings("deprecation")
-    public Date getDateValue(String name, String key, boolean mustInput) throws BizException{
+    public Date getDate(String name, String key, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -406,7 +406,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @return name 返回值描述
      */
     @SuppressWarnings("unchecked")
-    public <T> T getValueByTypeRequired(String name, String key, Class<T> clazz) throws BizException{
+    public <T> T getTypeRequired(String name, String key, Class<T> clazz) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -432,7 +432,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @return name 返回值描述
      */
     @SuppressWarnings("unchecked")
-    public <T> T getValueByType(String name, String key, Class<T> clazz, boolean mustInput) throws BizException{
+    public <T> T getType(String name, String key, Class<T> clazz, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
@@ -458,7 +458,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @return name 返回值描述
      */
     @SuppressWarnings("unchecked")
-    public <T> List<T> getListByTypeRequired(String name, String key, Class<T> clazz) throws BizException{
+    public <T> List<T> getListTypeRequired(String name, String key, Class<T> clazz) throws BizException{
 
         Object value = this.get(key);
         if(value == null || value.toString().isEmpty()){
@@ -479,7 +479,7 @@ public class RequestMap extends HashMap<String, Object> implements Serializable 
      * @param key 参数描述
      * @return name 返回值描述
      */
-    public <T> List<T> getListByType(String name, String key, Class<T> clazz, boolean mustInput) throws BizException{
+    public <T> List<T> getListType(String name, String key, Class<T> clazz, boolean mustInput) throws BizException{
 
         Object value = this.get(key);
         if(mustInput && (value == null || value.toString().isEmpty())){
