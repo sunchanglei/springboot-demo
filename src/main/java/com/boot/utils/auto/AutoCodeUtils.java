@@ -47,13 +47,15 @@ public class AutoCodeUtils {
     private String packageName;
     private String templateDir;
     private String srcFile;
+    private String xmlFile;
 
-    public AutoCodeUtils(ConnDB connDB, String packageName, String[] tableNames,String srcFile, String templateDir) {
+    public AutoCodeUtils(ConnDB connDB, String packageName, String[] tableNames,String srcFile, String templateDir,String xmlFile) {
         this.connDB = connDB;
         this.packageName = packageName;
         this.tableNames = tableNames;
         this.templateDir = templateDir;
         this.srcFile = srcFile;
+        this.xmlFile = xmlFile;
     }
 
   
@@ -79,7 +81,7 @@ public class AutoCodeUtils {
             //设置模板文件路径
             Map<String, Object> rootMap = new HashMap<String, Object>();
             rootMap.put("packageName", packageName);
-            rootMap.put("tableName", table);
+            rootMap.put("tableName", table.getTableName());
             rootMap.put("className", className);
             rootMap.put("classDesc", table.getTableComment());
             rootMap.put("columnList", columnList);
@@ -92,6 +94,9 @@ public class AutoCodeUtils {
                 }
 
                 String newFile = srcFile +"\\"+fileNameArray[i];
+                if ("mapperXml".equals(fileNameArray[i])){
+                    newFile = xmlFile +"\\"+fileNameArray[i];
+                }
                 File dir2 = new File(newFile + "\\");
                 //检查目录是否存在，不存在则创建
                 if (!dir2.exists()) {
@@ -105,7 +110,11 @@ public class AutoCodeUtils {
                     continue;
                 }
                 Writer docout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
-                Template temp = cfg.getTemplate(fileNameArray[i]+"Class.ftl");
+                String tempPath = fileNameArray[i]+"Class.ftl";
+                if ("mapperXml".equals(fileNameArray[i])){
+                    tempPath = fileNameArray[i]+".ftl";
+                }
+                Template temp = cfg.getTemplate(tempPath);
                 temp.process(rootMap, docout);//输出文件
                 docout.close();
             }

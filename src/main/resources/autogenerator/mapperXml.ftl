@@ -1,36 +1,26 @@
 <#list methodList as method>
-    <#if method.type == "list_one">
+    <#if method.type == "list">
     <!--${method.comment}-->
-    <select id="listBy${method.params[0].name?cap_first}" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="${method.name}" resultMap="BaseResultMap" parameterType="java.lang.String">
         select <include refid="Base_Column_List" />
         from ${tableName}
         where
-        ${method.params[0].name} = ${r"#{"}${method.params[0].name}${r"}"}
+        <#list method.params as param>
+        ${param.name} = ${r"#{"}${param.name}${r"}"}
+        </#list>
     </select>
-    <#elseif method.type == "list_two">
+    <#elseif method.type == "page">
     <!--${method.comment}-->
-    <select id="listBy${method.params[0].name?cap_first}And${method.params[1].name?cap_first}" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="${method.name}" resultMap="BaseResultMap" parameterType="java.lang.String">
         select <include refid="Base_Column_List" />
         from ${tableName}
         where
-        ${method.params[0].name} = ${r"#{"}${method.params[0].name}${r"}"}
-        and ${method.params[1].name} = ${r"#{"}${method.params[1].name}${r"}"}
-    </select>
-    <#elseif method.type == "list_three">
-    <!--${method.comment}-->
-    <select id="listBy${method.params[0].name?cap_first}And${method.params[1].name?cap_first}And${method.params[2].name?cap_first}" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select <include refid="Base_Column_List" />
-        from ${tableName}
-        where
-        ${method.params[0].name} = ${r"#{"}${method.params[0].name}${r"}"}
-        and ${method.params[1].name} = ${r"#{"}${method.params[1].name}${r"}"}
-        and ${method.params[2].name} = ${r"#{"}${method.params[2].name}${r"}"}
-    </select>
-    <#elseif method.type == "list_all">
-    <!--${method.comment}-->
-    <select id="listByAll" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select <include refid="Base_Column_List" />
-        from ${tableName}
+        <#list method.params as param>
+        <#if param.name != "offset" && param.name != "pageSize">
+        ${param.name} = ${r"#{"}${param.name}${r"}"}
+        </#if>
+        </#list>
+        limit #{method.offset},#{method.pageSize}
     </select>
     <#elseif method.type == "list_more">
     <!--${method.comment}-->
